@@ -1,6 +1,6 @@
 <?php
 /**
- * Installs the database tables for a flock.
+ * Installs and upgrades the database tables for flock community.
  * Creates a table each for a particular flock and the associated relationships
  *
  * @author Saurabh Shukla <contact.saurabhshukla@gmail.com>

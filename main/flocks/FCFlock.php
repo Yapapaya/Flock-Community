@@ -30,13 +30,17 @@ class FCFlock {
      *  
      * @return boolean
      */
-    public function register_flock($params=array()){
+    public function register($params=array()){
         
         if(empty($params)){
            return false; 
         }
         
         extract($params);
+        
+    }
+    
+    public function flock(){
         
     }
 

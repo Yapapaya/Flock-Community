@@ -108,5 +108,5 @@ spl_autoload_register ( 'fc_autoloader' );
 /**
  * Initialize the application.
  */
-global $fc;
-$fc = new FlockCommunity();
+global $flock_community;
+$flock_community = new FlockCommunity();

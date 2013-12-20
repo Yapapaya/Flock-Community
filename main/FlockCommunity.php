@@ -32,29 +32,24 @@ if (!class_exists('FlockCommunity')) {
 //            add_action('admin_bar_menu', array($admin_bar, 'init_bar'));
         }
         
-        /**
-         * Checks if maintenance/upgrades are needed
-         * 
-         * @return boolean true, if maintenance is needed
-         */
-        private function needs_maintenance(){
-            return false;
-        }
-        
-        /**
-         * Checks if plugin is installed for the first time
-         * 
-         * @return boolean true, if this is the first install
-         */
-        private function first_install(){
-            return false;
-        }
         
         /**
          * Initialises functionality
          */
         private function init() {
+            
+            // load translation
             $this->load_translation();
+            
+            // Run maintenance system
+            new FCMaintenance();
+            
+            if(is_user_logged_in()){
+                $this->user = wp_get_current_user();
+            }
+            
+            $this->setup_environment();
+            
         }
         
         /**
@@ -63,6 +58,12 @@ if (!class_exists('FlockCommunity')) {
         private function load_translation() {
             load_plugin_textdomain('flock-community', false, basename(FLOCK_COM_PATH) . '/languages/');
         }
+        
+        private function setup_environment(){
+           
+        }
+        
+        
 
     }
 
