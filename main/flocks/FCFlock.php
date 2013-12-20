@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of FCFlock
  *
@@ -16,34 +10,69 @@ class FCFlock {
     public function __construct() {
         
     }
-    
+
     /**
      * 
      * @param array $params Parameters for registering a new flock
-     * $parameters = array(
-     *  'name'          => 'circle',
-     *  'plural_name'   => 'circles',
-     *  'is_one_way'    => 'true',
-     *  'membership'    => 'private', // 'invitation', 'request'
-     *  'notification_is_one_way'   => 'true',
-     *  ),
-     *  
      * @return boolean
      */
-    public function register($params=array()){
-        
-        if(empty($params)){
-           return false; 
+    public function register($params = array()) {
+
+        if (empty($params)) {
+            return false;
         }
-        
+
         extract($params);
-        
     }
-    
-    public function flock(){
-        
+
+    /**
+     * 
+     */
+    public function register_defaults() {
+
+        $params[] = array(
+            'name' => 'circle',
+            'plural_name' => 'circles',
+            'membership' => 'private',
+            'notification_direction' => 'to'
+        );
+
+        $params[] = array(
+            'name' => 'system_circle',
+            'plural_name' => 'system_circles',
+            'membership' => 'auto',
+            'notification_direction' => false
+        );
+
+        $params[] = array(
+            'name' => 'group',
+            'plural_name' => 'groups',
+            'membership' => 'request',
+            'notification_direction' => 'tofro'
+        );
+
+        /**
+         * 
+          $params[] = array(
+          'name' => 'interest',
+          'plural_name' => 'interests',
+          'membership' => 'auto',
+          'notification_direction'   => false
+          );
+
+          $params[] = array(
+          'name' => 'event',
+          'plural_name' => 'events',
+          'membership' => 'request',
+          'notification_direction'   => 'tofro'
+          );
+         * 
+         */
+        $params = apply_filters(FLOCK_COM_PREFIX . 'register_flock', $params);
+
+        foreach ($params as $param) {
+            $this->register($param);
+        }
     }
 
 }
-
-?>
