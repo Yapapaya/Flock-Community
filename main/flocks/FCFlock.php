@@ -16,6 +16,35 @@ class FCFlock {
     public function __construct() {
         
     }
+    
+    /**
+     * 
+     * @param array $params Parameters for registering a new flock
+     * $parameters = array(
+     *  'name'          => 'circle',
+     *  'plural_name'   => 'circles',
+     *  'is_one_way'    => 'true',
+     *  'membership'    => 'private', // 'invitation', 'request'
+     *  'labels'        => array(
+     *  ),
+     *  
+     * @param boolean $is_separate_table
+     * @return boolean
+     */
+    public function register_flock($params=array(),$is_separate_table=false){
+        
+        if(empty($params)){
+           return false; 
+        }
+        
+        extract($params);
+        
+        if($is_separate_table){
+            $installer = new FCFlockDBInstall($name);
+            $installer->install();
+        }
+        
+    }
 
 }
 

@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Flock Community\n"
+"POT-Creation-Date: 2013-12-19 15:45+0530\n"
+"PO-Revision-Date: 2013-12-19 19:06+0530\n"
+"Last-Translator: \n"
+"Language-Team: Saurabh Shukla <saurabh@yapapaya.com>\n"
+"Language: en_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././main/ui/FCAdminBar.php:15
+msgid "Add to Circle"
+msgstr ""
+
+#: .././main/ui/FCAdminBar.php:16
+msgid "Add to Group"
+msgstr ""
+
+#: .././main/ui/FCAdminBar.php:17
+msgid "Add to Groups"
+msgstr ""

@@ -7,15 +7,18 @@
  */
 
 /**
- * Description of FCUser
+ * Description of FCMenu
  *
  * @author Saurabh Shukla <contact.saurabhshukla@gmail.com>
  */
-class FCUser {
+class FCMenu {
+    
+    public $menu = array();
 
     public function __construct() {
-        
+        $this->menu = get_site_option('_flock_menu_items');
     }
+    
 
 }
 

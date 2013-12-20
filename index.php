@@ -2,24 +2,31 @@
 
 /*
   Plugin Name: Flock Community
-  Plugin URI: http://rtcamp.com/buddypress-media/?utm_source=dashboard&utm_medium=plugin&utm_campaign=buddypress-media
+  Plugin URI: http://github.com/yapapaya/Flock-Community
   Description: Tools for building a community (not a social network) around your WordPress website
   Version: 0.1
   Author: saurabhshukla
   Text Domain: flock-community
-  Author URI: http://rtcamp.com/?utm_source=dashboard&utm_medium=plugin&utm_campaign=buddypress-media
+  Author URI: http://profiles.wordpress.org/saurabhshukla/
  */
+
+
+
+if (!defined('FLOCK_COM_KEYWORD')) {
+    define('FLOCK_COM_KEYWORD', 'flock');
+}
 
 
 /**
  * Define plugin absolute path and url
  */
-if (!defined('FLOCK_PATH')) {
-    define('FLOCK_PATH', plugin_dir_path(__FILE__));
+
+if (!defined('FLOCK_COM_PATH')) {
+    define('FLOCK_COM_PATH', plugin_dir_path(__FILE__));
 }
 
-if (!defined('FLOCK_URL')) {
-    define('FLOCK_URL', plugin_dir_url(__FILE__));
+if (!defined('FLOCK_COM_URL')) {
+    define('FLOCK_COM_URL', plugin_dir_url(__FILE__));
 }
 
 /**
@@ -39,20 +46,29 @@ function fc_autoloader($class_name) {
     $base_path = 'main/';
     $subpath_array = apply_filters(
             'fc_autoloader_subpath', array(
+                false,
         'relationships',
         'flocks',
         'circles',
-        'groups'
+        'groups',
+                'users',
+                'installation'
             )
     );
 
     foreach ($subpath_array as $path) {
-        $path = RTMEDIA_PATH . $base_path . '/' . $path . '/' . $class_name;
+         if ($path){
+            $path = FLOCK_PATH . $base_path . $path . '/' . $class_name . '.php';
+        }else{
+            $path = FLOCK_PATH . $base_path . $class_name. '.php';
+        }
+        
         if (file_exists($path)) {
             include $path;
             break;
         }
     }
+    
 }
 
 /**
@@ -65,8 +81,3 @@ spl_autoload_register ( 'fc_autoloader' );
  */
 global $fc;
 $fc = new FlockCommunity();
-
-
-/*
- * Look Ma! Very few includes! Next File: /app/main/RTMedia.php
- */
