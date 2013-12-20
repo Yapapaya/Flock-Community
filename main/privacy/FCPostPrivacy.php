@@ -34,14 +34,13 @@ class FCPostPrivacy {
 
     private function setup_tables() {
         $this->table_name['flocks'] = $this->table_name('flocks');
-        $this->table_name['relationships'] = $this->table_name('relationsips');
+        $this->table_name['relationships'] = $this->table_name('relationships');
         $this->table_name['post_index'] = $this->table_name('post_index');
     }
 
     public function posts_join($join_array) {
-
+        global $wpdb;
         $default_join = $join_array[0];
-        $wp_query_object = $join_array[1];
         $this->setup_tables();
 
 
@@ -51,21 +50,22 @@ class FCPostPrivacy {
 
         if ($flock_community->user) {
             $join .= " LEFT JOIN $this->table_name['relationships']" .
-                    " ON $this->table_name['post_index'].flock_id = $this->table_name['relationships'].flock_id";
+                    " ON $this->table_name['post_index'].flock_id ="
+                    . " $this->table_name['relationships'].flock_id";
         }
         
         return $default_join.$join;
     }
 
-    public function posts_groupby() {
-
-        $this->setup_tables();
-        global $flock_community;
+    public function posts_groupby($groupby_array) {
+        global $wpdb;
+        $groupby = "{$wpdb->posts}.ID";
+        return $groupby;
     }
 
     public function posts_where($where_array) {
+        global $wpdb;
         $default_where = $where_array[0];
-        $wp_query_object = $where_array[1];
 
         $this->setup_tables();
         global $flock_community;
