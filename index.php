@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name: Flock Community
   Plugin URI: http://github.com/yapapaya/Flock-Community
@@ -10,15 +9,43 @@
   Author URI: http://profiles.wordpress.org/saurabhshukla/
  */
 
+/**
+ * Default file, contains Plugin Meta data for WordPress
+ * Some constants and autoloading mechanism
+ * Initialises the application (plugin)
+ */
 
+/**
+ * Versioning Information
+ */
 
-if (!defined('FLOCK_COM_KEYWORD')) {
-    define('FLOCK_COM_KEYWORD', 'flock');
+if (!defined('FLOCK_COM_VERSION')) {
+    define('FLOCK_COM_VERSION', 0.1);
+}
+
+if (!defined('FLOCK_COM_DB_VERSION')) {
+    define('FLOCK_COM_DB_VERSION', 1);
+}
+
+/**
+ * Prefix for options and meta stuff
+ */
+if (!defined('FLOCK_COM_PREFIX')) {
+    define('FLOCK_COM_PREFIX', '_flock_com_');
 }
 
 
 /**
- * Define plugin absolute path and url
+ * Debug Mode
+ */
+
+if (!defined('FLOCK_COM_DEBUG')) {
+    // define it as WordPress's debug mode, by default
+    define('FLOCK_COM_DEBUG', WP_DEBUG);
+}
+
+/**
+ * Define plugin absolute path and url for ease of use
  */
 
 if (!defined('FLOCK_COM_PATH')) {
@@ -40,7 +67,7 @@ if (!session_id()) {
 /**
  * Autoload classes
  * 
- * @param string $class_name
+ * @param string $class_name The name of the class
  */
 function fc_autoloader($class_name) {
     $base_path = 'main/';
@@ -52,15 +79,17 @@ function fc_autoloader($class_name) {
         'circles',
         'groups',
                 'users',
-                'installation'
+                'installation',
+                'maintenance',
+                'ui'
             )
     );
 
     foreach ($subpath_array as $path) {
          if ($path){
-            $path = FLOCK_PATH . $base_path . $path . '/' . $class_name . '.php';
+            $path = FLOCK_COM_PATH . $base_path . $path . '/' . $class_name . '.php';
         }else{
-            $path = FLOCK_PATH . $base_path . $class_name. '.php';
+            $path = FLOCK_COM_PATH . $base_path . $class_name. '.php';
         }
         
         if (file_exists($path)) {
@@ -77,7 +106,7 @@ function fc_autoloader($class_name) {
 spl_autoload_register ( 'fc_autoloader' );
 
 /**
- * Instantiate the Flock Community class.
+ * Initialize the application.
  */
 global $fc;
 $fc = new FlockCommunity();

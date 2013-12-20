@@ -25,24 +25,18 @@ class FCFlock {
      *  'plural_name'   => 'circles',
      *  'is_one_way'    => 'true',
      *  'membership'    => 'private', // 'invitation', 'request'
-     *  'labels'        => array(
+     *  'notification_is_one_way'   => 'true',
      *  ),
      *  
-     * @param boolean $is_separate_table
      * @return boolean
      */
-    public function register_flock($params=array(),$is_separate_table=false){
+    public function register_flock($params=array()){
         
         if(empty($params)){
            return false; 
         }
         
         extract($params);
-        
-        if($is_separate_table){
-            $installer = new FCFlockDBInstall($name);
-            $installer->install();
-        }
         
     }
 
